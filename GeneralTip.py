@@ -24,6 +24,14 @@ y_data = st.sidebar.selectbox('Y축 데이터를 선택하세요.',['total_bill'
 st.sidebar.write('')
 
 ## body
+
+
+# -- 데이터 확인
+with st.expander('Raw Data'):
+    st.dataframe(df)
+
+
+
 # row 1
 st.subheader('Numaric Values')
 st.write('')
