@@ -108,36 +108,6 @@ st.write('')
 # ---------------------
 # 시각화
 st.subheader('📉 시각화')
-# if figure_type == 'px.scatter':
-#     fig = px.scatter(data_frame = df,
-#                  x=x_data,
-#                  y=y_data,
-#                  color = x_data,
-#                  size = y_data,
-#                  facet_col = 'size',
-#                  facet_row = 'size')
-#     st.plotly_chart(fig, use_container_width=True)
-# elif figure_type == 'px.bar':
-#     fig = px.bar(data_frame = df,
-#                  x=x_data,
-#                  y=y_data,
-#                  color = x_data)
-#     st.plotly_chart(fig, use_container_width=True)
-# elif figure_type == 'px.pie':
-#     fig = px.pie(data_frame=df,
-#                  names=x_data,
-#                  values=y_data,
-#                  color=x_data )
-#     st.plotly_chart(fig, use_container_width=True)
-# elif figure_type == 'px.donut':
-#     fig = px.pie(data_frame=df,
-#                  names=x_data,
-#                  values=y_data,
-#                  color=x_data,
-#                  hole=0.4)
-#     st.plotly_chart(fig, use_container_width=True)
-# else:
-#     st.write('No Graph Selected')
     
 if figure_type == 'px.scatter':
     fig = px.scatter(filtered_df, x=x_data, y=y_data, color=x_data, size=y_data,
@@ -157,3 +127,54 @@ elif figure_type == 'px.donut':
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info('그래프 유형을 선택하세요.')
+
+
+# ---------------------
+# EDA 시각화 선택
+st.subheader("🔍 탐색적 데이터 분석")
+
+eda_option = st.selectbox(
+    "분석 항목을 선택하세요:",
+    (
+        "결제 금액과 팁 간의 상관관계",
+        "요일별 평균 팁",
+        "흡연 여부에 따른 팁 차이",
+        "식사 시간대에 따른 결제 금액 차이",
+        "동반 인원 수에 따른 팁 변화"
+    )
+)
+
+if eda_option == "결제 금액과 팁 간의 상관관계":
+    fig = px.scatter(filtered_df, x='total_bill', y='tip', color='sex',
+                     trendline='ols', title='Total Bill vs Tip')
+    st.plotly_chart(fig, use_container_width=True)
+    correlation = filtered_df['total_bill'].corr(filtered_df['tip'])
+    st.markdown(f"📌 **결제 금액과 팁 간의 상관계수**: `{correlation:.2f}`")
+    st.info("결제 금액이 높을수록 팁 금액도 증가하는 경향이 있습니다. 상관계수가 양의 값을 가지며, 두 변수 간의 선형 관계를 시사합니다.")
+
+elif eda_option == "요일별 평균 팁":
+    avg_tip_by_day = filtered_df.groupby('day')['tip'].mean().reset_index()
+    fig = px.bar(avg_tip_by_day, x='day', y='tip', color='day',
+                 title='요일별 평균 팁 금액')
+    st.plotly_chart(fig, use_container_width=True)
+    st.info("요일에 따라 고객이 남기는 팁 금액에 차이가 있습니다. 예를 들어, 주말에는 손님이 많거나 분위기가 더 좋아 팁이 많을 수 있습니다.")
+
+elif eda_option == "흡연 여부에 따른 팁 차이":
+    fig = px.box(filtered_df, x='smoker', y='tip', color='smoker',
+                 title='흡연 여부에 따른 팁 분포 (Boxplot)')
+    st.plotly_chart(fig, use_container_width=True)
+    st.info("흡연자와 비흡연자 그룹 간의 팁 분포를 비교해볼 수 있습니다. 중간값과 이상치를 시각적으로 확인할 수 있습니다.")
+
+elif eda_option == "식사 시간대에 따른 결제 금액 차이":
+    fig = px.violin(filtered_df, x='time', y='total_bill', color='time',
+                    box=True, points='all',
+                    title='식사 시간대별 결제 금액 분포 (Violin Plot)')
+    st.plotly_chart(fig, use_container_width=True)
+    st.info("점심과 저녁 시간대의 결제 금액 분포를 비교해볼 수 있습니다. 일반적으로 저녁 시간대의 결제 금액이 더 높은 경향이 있습니다.")
+
+elif eda_option == "동반 인원 수에 따른 팁 변화":
+    avg_tip_by_size = filtered_df.groupby('size')['tip'].mean().reset_index()
+    fig = px.line(avg_tip_by_size, x='size', y='tip', markers=True,
+                  title='인원 수에 따른 평균 팁 변화')
+    st.plotly_chart(fig, use_container_width=True)
+    st.info("동반 인원 수가 많아질수록 팁이 증가하는 경향을 볼 수 있습니다. 하지만 일정 인원 수 이후에는 팁이 정체되거나 감소할 수도 있습니다.")
