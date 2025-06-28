@@ -7,3 +7,5 @@ option = st.selectbox('하나를 선택해주세요.',['가','나','다'])
 
 # for item in option:
 #     st.write(item)
+
+level = st.slider("난이도", min_value=1, max_value=5)

@@ -5,6 +5,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import matplotlib.font_manager as fm
+
+# 한글 폰트 설정 (Windows 기준)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
 
 # Page Config
 st.set_page_config(page_title='JST 공유대학 해커톤',
@@ -16,11 +21,12 @@ st.set_page_config(page_title='JST 공유대학 해커톤',
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv('tips.csv')
-        return df
+        df = pd.read_csv('tips.csv')  # CSV 파일 로드 시도
+        return df                     # 성공 시 DataFrame 반환
     except FileNotFoundError:
         st.error("🚨 'tips.csv' 파일이 존재하지 않습니다. 파일을 업로드하거나 경로를 확인하세요.")
-        return pd.DataFrame()
+        return pd.DataFrame()         # 실패 시 빈 DataFrame 반환
+
 
 df = load_data()
 if df.empty:
