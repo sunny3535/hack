@@ -7,12 +7,10 @@ import seaborn as sns
 import plotly.express as px
 import matplotlib.font_manager as fm
 
-# 한글 폰트 설정 (Windows 기준)
-plt.rcParams['font.family'] = 'Malgun Gothic'
-plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
-
 font_path = './NanumGothic.ttf'  # GitHub에 함께 업로드해야 함
 fontprop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = fontprop.get_name()
+plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
 
 # Page Config
 st.set_page_config(page_title='JST 공유대학 해커톤',
