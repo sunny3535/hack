@@ -76,7 +76,7 @@ with st.expander('📋 Tips 데이터 설명'):
     with col1:
         st.markdown("- **total_bill**: 전체 결제 금액")
         st.markdown("- **tip**: 팁 금액")
-        st.markdown("- **sex**: 고객 성별 (Male/Female)")
+        st.markdown("- **성별**: 고객 성별 (Male/Female)")
         st.markdown("- **smoker**: 흡연자 여부 (Yes/No)")
         st.markdown("- **day**: 요일 (Thur, Fri, Sat, Sun)")
 
@@ -152,7 +152,7 @@ eda_option = st.selectbox(
 )
 
 if eda_option == "결제 금액과 팁 간의 상관관계":
-    fig = px.scatter(filtered_df, x='total_bill', y='tip', color='sex',
+    fig = px.scatter(filtered_df, x='total_bill', y='tip', color='성별',
                      trendline='ols', title='Total Bill vs Tip')
     st.plotly_chart(fig, use_container_width=True)
     correlation = filtered_df['total_bill'].corr(filtered_df['tip'])
