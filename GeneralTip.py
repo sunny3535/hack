@@ -117,7 +117,7 @@ st.subheader('📉 시각화')
     
 if figure_type == 'px.scatter':
     fig = px.scatter(filtered_df, x=x_data, y=y_data, color=x_data, size=y_data,
-                     title=f'{x_data} vs {y_data} (산점도)', labels={'남', '여'})
+                     title=f'{x_data} vs {y_data} (산점도)', labels={x_data: "x축이름", y_data: "y축이름"})
     st.plotly_chart(fig, use_container_width=True)
 elif figure_type == 'px.bar':
     fig = px.bar(filtered_df, x=x_data, y=y_data, color=x_data,
