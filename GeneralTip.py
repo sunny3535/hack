@@ -112,6 +112,23 @@ st.write('')
 st.write('')
 
 
+
+avg_tip_by_day = df.groupby("day")["tip"].mean().sort_index()
+
+# matplotlib으로 시각화
+fig, ax = plt.subplots()
+avg_tip_by_day.plot(kind="bar", ax=ax, color="skyblue", edgecolor="black")
+
+# 그래프 꾸미기
+ax.set_title("요일별 평균 팁", fontsize=16)
+ax.set_xlabel("요일", fontsize=12)
+ax.set_ylabel("평균 팁", fontsize=12)
+ax.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Streamlit에 출력
+st.pyplot(fig)
+
+
 # ---------------------
 # 시각화
 st.subheader('📉 시각화')
@@ -119,7 +136,7 @@ st.subheader('📉 시각화')
 if figure_type == 'px.scatter':
     fig = px.scatter(filtered_df, x=x_data, y=y_data, color=x_data, size=y_data,
                      title=f'{x_data} vs {y_data} (산점도)')
-    st.bar(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 elif figure_type == 'px.bar':
     fig = px.bar(filtered_df, x=x_data, y=y_data, color=x_data,
                  title=f'{x_data} 별 {y_data} (막대 그래프)')
