@@ -123,10 +123,10 @@ fig, ax = plt.subplots()
 avg_tip_by_day.plot(kind="bar", ax=ax, color="skyblue", edgecolor="black")
 
 # 그래프 꾸미기
-ax.set_title("요일별 평균 팁", fontsize=16)
-ax.set_xlabel("요일", fontsize=12)
-ax.set_ylabel("평균 팁", fontsize=12)
-ax.grid(axis='y', linestyle='--', alpha=0.7)
+ax.set_title("요일별 평균 팁", fontsize=16, fontproperties=fontprop)
+ax.set_xlabel("요일", fontsize=12, fontproperties=fontprop)
+ax.set_ylabel("평균 팁", fontsize=12, fontproperties=fontprop)
+ax.grid(axis='y', linestyle='--', alpha=0.7, fontproperties=fontprop)
 
 # Streamlit에 출력
 st.pyplot(fig)
