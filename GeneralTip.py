@@ -23,8 +23,9 @@ plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
 
 if platform.system() == 'Linux':
     fontname = './NanumGothic.ttf'
+    font_files = fm.findSystemFonts(fontpaths=fontname)
     fm.fontManager.addfont(fontname)
-    fm._load_fontmanager(try_read_cache=False)
+    # fm._load_fontmanager(try_read_cache=False)
     plt.rc('font', family=fontname)
     rc('font', family='NanumGothic')
 
