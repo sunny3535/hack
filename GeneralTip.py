@@ -26,8 +26,8 @@ if platform.system() == 'Linux':
     font_files = fm.findSystemFonts(fontpaths=fontname)
     fm.fontManager.addfont(fontname)
     # fm._load_fontmanager(try_read_cache=False)
-    plt.rc('font', family=fontname)
-    # rc('font', family='NanumGothic')
+    # plt.rc('font', family=fontname)
+    rc('font', family='NanumGothic')
 
 # Page Config
 st.set_page_config(page_title='JST 공유대학 해커톤',
@@ -51,6 +51,8 @@ if df.empty:
     st.stop()
 
 df.rename(columns={'sex': '성별'}, inplace=True)
+
+
 # ---------------------
 # Sidebar Filters
 st.sidebar.header('🔍 Filters')
