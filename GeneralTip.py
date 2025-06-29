@@ -33,7 +33,7 @@ if df.empty:
     st.stop()
 
 df.rename(columns={'sex': '성별'}, inplace=True)
-
+st.write(df)
 # ---------------------
 # Sidebar Filters
 st.sidebar.header('🔍 Filters')
