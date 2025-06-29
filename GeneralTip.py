@@ -25,8 +25,6 @@ if platform.system() == 'Linux':
     fontname = './NanumGothic.ttf'
     font_files = fm.findSystemFonts(fontpaths=fontname)
     fm.fontManager.addfont(fontname)
-    # fm._load_fontmanager(try_read_cache=False)
-    # plt.rc('font', family=fontname)
     rc('font', family='NanumGothic')
 
 # Page Config
