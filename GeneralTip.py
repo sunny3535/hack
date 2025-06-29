@@ -9,18 +9,12 @@ import matplotlib.font_manager as fm
 import platform
 from matplotlib import rc
 
-# font_path = './NanumGothic.ttf'  # GitHub에 함께 업로드해야 함
-# font_files = fm.findSystemFonts(fontpaths=font_path)
-
-# # fontprop = fm.FontProperties(fname=font_path)
-# plt.rc('font', family=font_path)
-# # plt.rcParams['font.family'] = fontprop.get_name()
-# plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
 
 # 한글 폰트 설정 (Windows 기준)
 plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
 
+# 깃허브 리눅스 기준
 if platform.system() == 'Linux':
     fontname = './NanumGothic.ttf'
     font_files = fm.findSystemFonts(fontpaths=fontname)
@@ -128,21 +122,6 @@ st.write('')
 st.write('')
 
 
-
-avg_tip_by_day = df.groupby("day")["tip"].mean().sort_index()
-
-# matplotlib으로 시각화
-fig, ax = plt.subplots()
-avg_tip_by_day.plot(kind="bar", ax=ax, color="skyblue", edgecolor="black")
-
-# 그래프 꾸미기
-ax.set_title("요일별 평균 팁", fontsize=16)
-ax.set_xlabel("요일", fontsize=12)
-ax.set_ylabel("평균 팁", fontsize=12)
-ax.grid(axis='y', linestyle='--', alpha=0.7)
-
-# Streamlit에 출력
-st.pyplot(fig)
 
 
 # ---------------------
