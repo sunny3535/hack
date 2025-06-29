@@ -6,11 +6,27 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import matplotlib.font_manager as fm
+import platform
+from matplotlib import rc
 
-font_path = './NanumGothic.ttf'  # GitHub에 함께 업로드해야 함
-fontprop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = fontprop.get_name()
+# font_path = './NanumGothic.ttf'  # GitHub에 함께 업로드해야 함
+# font_files = fm.findSystemFonts(fontpaths=font_path)
+
+# # fontprop = fm.FontProperties(fname=font_path)
+# plt.rc('font', family=font_path)
+# # plt.rcParams['font.family'] = fontprop.get_name()
+# plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
+
+# 한글 폰트 설정 (Windows 기준)
+plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
+
+if platform.system() == 'Linux':
+    fontname = './NanumGothic.ttf'
+    fm.fontManager.addfont(fontname)
+    fm._load_fontmanager(try_read_cache=False)
+    plt.rc('font', family=fontname)
+    rc('font', family='NanumGothic')
 
 # Page Config
 st.set_page_config(page_title='JST 공유대학 해커톤',
@@ -121,10 +137,10 @@ fig, ax = plt.subplots()
 avg_tip_by_day.plot(kind="bar", ax=ax, color="skyblue", edgecolor="black")
 
 # 그래프 꾸미기
-ax.set_title("요일별 평균 팁", fontsize=16, fontproperties=fontprop)
-ax.set_xlabel("요일", fontsize=12, fontproperties=fontprop)
-ax.set_ylabel("평균 팁", fontsize=12, fontproperties=fontprop)
-ax.grid(axis='y', linestyle='--', alpha=0.7, fontproperties=fontprop)
+ax.set_title("요일별 평균 팁", fontsize=16)
+ax.set_xlabel("요일", fontsize=12)
+ax.set_ylabel("평균 팁", fontsize=12)
+ax.grid(axis='y', linestyle='--', alpha=0.7)
 
 # Streamlit에 출력
 st.pyplot(fig)
