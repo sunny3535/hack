@@ -32,12 +32,13 @@ df = load_data()
 if df.empty:
     st.stop()
 
+df.rename(columns={'sex': '성별'}, inplace=True)
 
 # ---------------------
 # Sidebar Filters
 st.sidebar.header('🔍 Filters')
 day_filter = st.sidebar.multiselect('요일 선택', options=df['day'].unique(), default=df['day'].unique())
-sex_filter = st.sidebar.multiselect('성별 선택', options=df['sex'].unique(), default=df['sex'].unique())
+sex_filter = st.sidebar.multiselect('성별 선택', options=df['성별'].unique(), default=df['성별'].unique())
 smoker_filter = st.sidebar.multiselect('흡연 여부 선택', options=df['smoker'].unique(), default=df['smoker'].unique())
 time_filter = st.sidebar.multiselect('식사 시간대 선택', options=df['time'].unique(), default=df['time'].unique())
 
@@ -45,7 +46,7 @@ time_filter = st.sidebar.multiselect('식사 시간대 선택', options=df['time
 # 필터링
 filtered_df = df[
     (df['day'].isin(day_filter)) &
-    (df['sex'].isin(sex_filter)) &
+    (df['성별'].isin(sex_filter)) &
     (df['smoker'].isin(smoker_filter)) &
     (df['time'].isin(time_filter))
 ]
@@ -117,7 +118,7 @@ st.subheader('📉 시각화')
     
 if figure_type == 'px.scatter':
     fig = px.scatter(filtered_df, x=x_data, y=y_data, color=x_data, size=y_data,
-                     title=f'{x_data} vs {y_data} (산점도)', labels={x_data: "x축이름", y_data: "y축이름"})
+                     title=f'{x_data} vs {y_data} (산점도)')
     st.plotly_chart(fig, use_container_width=True)
 elif figure_type == 'px.bar':
     fig = px.bar(filtered_df, x=x_data, y=y_data, color=x_data,
