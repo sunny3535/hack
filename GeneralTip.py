@@ -27,7 +27,7 @@ if platform.system() == 'Linux':
     fm.fontManager.addfont(fontname)
     # fm._load_fontmanager(try_read_cache=False)
     plt.rc('font', family=fontname)
-    rc('font', family='NanumGothic')
+    # rc('font', family='NanumGothic')
 
 # Page Config
 st.set_page_config(page_title='JST 공유대학 해커톤',
