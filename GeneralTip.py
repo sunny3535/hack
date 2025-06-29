@@ -56,7 +56,7 @@ st.sidebar.write('')
 # 시각화 옵션
 st.sidebar.header('🔍 시각화 옵션')
 figure_type = st.sidebar.selectbox('시각화 형태 선택', ['px.scatter', 'px.bar', 'px.pie', 'px.donut'])
-x_data = st.sidebar.selectbox('X축 데이터 선택', ['sex','smoker','day','size','time', 'total_bill'])
+x_data = st.sidebar.selectbox('X축 데이터 선택', ['성별','smoker','day','size','time', 'total_bill'])
 y_data = st.sidebar.selectbox('Y축 데이터 선택', ['total_bill','tip'])
 
 st.sidebar.write('')
